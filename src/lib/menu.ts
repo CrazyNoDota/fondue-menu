@@ -1,0 +1,307 @@
+export type Lang = "ru" | "kz" | "en";
+
+type L = { ru: string; kz: string; en: string };
+
+export type MenuItem = {
+  name: string;
+  price: string; // formatted without currency symbol, e.g. "3 200" or "950 / 1 350"
+  tag?: L;
+  note?: string;
+};
+
+export type MenuCategory = {
+  id: string;
+  title: L;
+  items: MenuItem[];
+};
+
+const HIT: L = { ru: "хит", kz: "хит", en: "top" };
+const SPICY: L = { ru: "остро", kz: "ащы", en: "spicy" };
+const CHEF: L = { ru: "от шефа", kz: "шефтен", en: "chef’s" };
+
+export const LANGS: { code: Lang; label: string }[] = [
+  { code: "ru", label: "RU" },
+  { code: "kz", label: "ҚАЗ" },
+  { code: "en", label: "EN" },
+];
+
+export const MENU: MenuCategory[] = [
+  {
+    id: "salads",
+    title: { ru: "Салаты", kz: "Салаттар", en: "Salads" },
+    items: [
+      { name: "Цезарь с курицей", price: "3 200", tag: HIT },
+      { name: "Цезарь с креветками", price: "3 500" },
+      { name: "Хрустящие баклажаны в кисло-сладком соусе", price: "2 750" },
+      { name: "Греческий", price: "2 900" },
+    ],
+  },
+  {
+    id: "starters",
+    title: { ru: "Закуски", kz: "Тіскебасарлар", en: "Starters" },
+    items: [
+      { name: "Жареные креветки", price: "3 300" },
+      { name: "Хрустящие крылышки", price: "4 500", note: "1 кг" },
+      { name: "Хрустящие крылышки", price: "2 750", note: "0,5 кг" },
+      { name: "Наггетсы", price: "1 690" },
+    ],
+  },
+  {
+    id: "soups",
+    title: { ru: "Супы", kz: "Сорпалар", en: "Soups" },
+    items: [
+      { name: "Суп лапша куриная", price: "1 650" },
+      { name: "Чечевичный крем-суп", price: "1 450" },
+      { name: "Рамён с курицей", price: "1 850", tag: HIT },
+      { name: "Рамён с говядиной", price: "2 250" },
+      { name: "Том ям", price: "2 400", tag: SPICY },
+      { name: "Шорпа из баранины", price: "2 450" },
+    ],
+  },
+  {
+    id: "mains",
+    title: { ru: "Вторые блюда", kz: "Ыстық тағамдар", en: "Mains" },
+    items: [
+      { name: "Стейк Тибон", price: "2 900", tag: CHEF },
+      { name: "Стейк Рибай", price: "2 900", tag: CHEF },
+      { name: "Томлёные говяжьи рёбрышки", price: "2 900" },
+      { name: "Бефстроганов", price: "3 550" },
+    ],
+  },
+  {
+    id: "eastern",
+    title: { ru: "Восточная кухня", kz: "Шығыс асханасы", en: "Eastern Cuisine" },
+    items: [
+      { name: "Куырдак с кониной", price: "3 200" },
+      { name: "Куырдак с бараниной", price: "3 200" },
+      { name: "Казан кебаб", price: "3 400", tag: HIT },
+      { name: "Бешбармак", price: "3 850", tag: CHEF },
+    ],
+  },
+  {
+    id: "pasta",
+    title: { ru: "Паста", kz: "Паста", en: "Pasta" },
+    items: [
+      { name: "Болоньезе", price: "2 850" },
+      { name: "Феттучини с курицей и грибами", price: "2 550" },
+    ],
+  },
+  {
+    id: "pizza",
+    title: { ru: "Пицца", kz: "Пицца", en: "Pizza" },
+    items: [
+      { name: "Маргарита", price: "2 550" },
+      { name: "Пепперони", price: "3 200", tag: HIT },
+      { name: "Курица с грибами", price: "2 950" },
+      { name: "Хачапури по-аджарски", price: "2 550" },
+    ],
+  },
+  {
+    id: "fastfood",
+    title: { ru: "Фастфуд", kz: "Фаст фуд", en: "Fast Food" },
+    items: [
+      { name: "Двойной бургер с говяжьей котлетой", price: "1 900" },
+      { name: "Двойной чизбургер с говяжьей котлетой", price: "1 900" },
+      { name: "Qazyburger с казы", price: "1 900", tag: CHEF },
+      { name: "Донер куриный", price: "1 850" },
+      { name: "Донер с говядиной", price: "2 250" },
+      { name: "Донер ассорти", price: "2 000" },
+    ],
+  },
+  {
+    id: "sides",
+    title: { ru: "Гарниры и хлеб", kz: "Гарнирлер мен нан", en: "Sides & Bread" },
+    items: [
+      { name: "Картофель фри", price: "1 190" },
+      { name: "Картофельные дольки", price: "1 190" },
+      { name: "Рис", price: "850" },
+      { name: "Овощи гриль", price: "1 450" },
+      { name: "Лепёшка", price: "450" },
+    ],
+  },
+  {
+    id: "desserts",
+    title: { ru: "Десерты", kz: "Тәттілер", en: "Desserts" },
+    items: [{ name: "Десерты в ассортименте", price: "2 450" }],
+  },
+  {
+    id: "sauces",
+    title: { ru: "Соусы", kz: "Тұздықтар", en: "Sauces" },
+    items: [
+      { name: "Кетчуп", price: "650" },
+      { name: "Сырный соус", price: "650" },
+      { name: "Грибной соус", price: "650" },
+      { name: "Барбекю", price: "650" },
+      { name: "Тартар соус", price: "650" },
+      { name: "Халапеньо", price: "650" },
+    ],
+  },
+  {
+    id: "hot",
+    title: { ru: "Горячие напитки", kz: "Ыстық сусындар", en: "Hot Drinks" },
+    items: [
+      { name: "Зелёный чай", price: "1 350" },
+      { name: "Ташкентский чай", price: "1 850" },
+      { name: "Марокканский чай", price: "1 850" },
+      { name: "Карак чай", price: "2 250", tag: HIT },
+      { name: "Масала чай", price: "2 250" },
+      { name: "Ягодный чай", price: "2 150" },
+      { name: "Шиповник-мята", price: "2 250" },
+      { name: "Облепиховый чай", price: "2 450" },
+      { name: "Да Хун Пао", price: "2 550" },
+      { name: "Пуэр", price: "2 250" },
+      { name: "Лимон", price: "450" },
+      { name: "Мёд", price: "450" },
+      { name: "Молоко", price: "450" },
+    ],
+  },
+  {
+    id: "cold",
+    title: { ru: "Холодные напитки", kz: "Салқын сусындар", en: "Cold Drinks" },
+    items: [
+      { name: "Лимонады в ассортименте", price: "2 350" },
+      { name: "Морс клюква", price: "2 250" },
+      { name: "Морс чёрная смородина", price: "2 250" },
+      { name: "Компот из сухофруктов", price: "1 350" },
+      { name: "Натуральные соки в ассортименте", price: "1 690" },
+      { name: "Кымыз", price: "2 500", tag: CHEF },
+      { name: "Coca-Cola", price: "950 / 1 350", note: "0,33 / 1 л" },
+      { name: "Вода", price: "650", note: "0,5 л" },
+    ],
+  },
+];
+
+export type Featured = {
+  image: string;
+  to: string; // category anchor
+  name: L;
+  price: string;
+  tag?: L;
+};
+
+export const FEATURED: Featured[] = [
+  {
+    image: "/img/steak.jpg",
+    to: "mains",
+    name: { ru: "Стейк Рибай", kz: "Рибай стейк", en: "Ribeye Steak" },
+    price: "2 900",
+    tag: CHEF,
+  },
+  {
+    image: "/img/caesar.jpg",
+    to: "salads",
+    name: { ru: "Цезарь с курицей", kz: "Тауық етімен Цезарь", en: "Chicken Caesar" },
+    price: "3 200",
+    tag: HIT,
+  },
+  {
+    image: "/img/ramen.jpg",
+    to: "soups",
+    name: { ru: "Рамён с курицей", kz: "Тауық рамені", en: "Chicken Ramen" },
+    price: "1 850",
+    tag: HIT,
+  },
+  {
+    image: "/img/pizza.jpg",
+    to: "pizza",
+    name: { ru: "Пепперони", kz: "Пепперони", en: "Pepperoni" },
+    price: "3 200",
+    tag: HIT,
+  },
+  {
+    image: "/img/burger.jpg",
+    to: "fastfood",
+    name: { ru: "Qazyburger с казы", kz: "Qazyburger", en: "Qazyburger" },
+    price: "1 900",
+    tag: CHEF,
+  },
+  {
+    image: "/img/tea.jpg",
+    to: "hot",
+    name: { ru: "Карак чай", kz: "Карак шай", en: "Karak Tea" },
+    price: "2 250",
+    tag: HIT,
+  },
+];
+
+export const I18N: Record<Lang, Record<string, string>> = {
+  ru: {
+    kicker: "Астана · Ресторан",
+    heroTagline: "Стейки на углях, восточная кухня, паста и пицца — в тёплой атмосфере",
+    viewMenu: "Смотреть меню",
+    howToGet: "Как добраться",
+    featuredTitle: "Рекомендуем",
+    menuTitle: "Меню",
+    currency: "₸",
+    infoTitle: "Как нас найти",
+    address: "Адрес",
+    addressValue: "Астана, Казахстан",
+    hours: "Часы работы",
+    hoursValue: "Ежедневно · 10:00 – 00:00",
+    phone: "Телефон",
+    route: "Маршрут в 2ГИС",
+    whatsapp: "WhatsApp",
+    instagram: "Instagram",
+    kaspi: "Оплата Kaspi",
+    qrNote: "Отсканировали QR — и меню всегда с собой. Цены в тенге, актуальны на сегодня.",
+    footerMade: "Электронное меню для ресторана Fondue",
+    footerDemo: "Демо-прототип · Фаза 1",
+    langLabel: "Язык",
+  },
+  kz: {
+    kicker: "Астана · Мейрамхана",
+    heroTagline: "Көмірдегі стейктер, шығыс асханасы, паста мен пицца — жылы атмосферада",
+    viewMenu: "Мәзірді қарау",
+    howToGet: "Қалай жету",
+    featuredTitle: "Ұсынамыз",
+    menuTitle: "Мәзір",
+    currency: "₸",
+    infoTitle: "Бізді қалай табуға болады",
+    address: "Мекенжай",
+    addressValue: "Астана, Қазақстан",
+    hours: "Жұмыс уақыты",
+    hoursValue: "Күнде · 10:00 – 00:00",
+    phone: "Телефон",
+    route: "2ГИС-те бағыт",
+    whatsapp: "WhatsApp",
+    instagram: "Instagram",
+    kaspi: "Kaspi төлемі",
+    qrNote: "QR-ды сканерледіңіз — мәзір әрқашан қасыңызда. Бағалар теңгемен, бүгінге өзекті.",
+    footerMade: "Fondue мейрамханасына арналған электронды мәзір",
+    footerDemo: "Демо-прототип · 1-кезең",
+    langLabel: "Тіл",
+  },
+  en: {
+    kicker: "Astana · Restaurant",
+    heroTagline: "Char-grilled steaks, Eastern cuisine, pasta & pizza — in a warm setting",
+    viewMenu: "View Menu",
+    howToGet: "Find Us",
+    featuredTitle: "Chef’s Picks",
+    menuTitle: "Menu",
+    currency: "₸",
+    infoTitle: "Find Us",
+    address: "Address",
+    addressValue: "Astana, Kazakhstan",
+    hours: "Hours",
+    hoursValue: "Daily · 10:00 – 00:00",
+    phone: "Phone",
+    route: "Route in 2GIS",
+    whatsapp: "WhatsApp",
+    instagram: "Instagram",
+    kaspi: "Pay with Kaspi",
+    qrNote: "Scan the QR — the menu is always with you. Prices in tenge, current today.",
+    footerMade: "Digital menu for Fondue restaurant",
+    footerDemo: "Demo prototype · Phase 1",
+    langLabel: "Language",
+  },
+};
+
+// Placeholder contact details — confirm with the venue before launch.
+export const CONTACT = {
+  instagram: "https://www.instagram.com/fondue.astana/",
+  phoneDisplay: "+7 700 000 00 00",
+  phoneHref: "tel:+77000000000",
+  whatsapp: "https://wa.me/77000000000",
+  twoGis: "https://2gis.kz/astana",
+  kaspi: "#",
+};
