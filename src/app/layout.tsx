@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Cormorant_Garamond, Manrope } from "next/font/google";
 import "./globals.css";
+import { LangProvider } from "@/lib/lang-context";
+import { LangSwitch } from "@/components/LangSwitch";
 
 const cormorant = Cormorant_Garamond({
   variable: "--font-cormorant",
@@ -44,7 +46,12 @@ export default function RootLayout({
       lang="ru"
       className={`${cormorant.variable} ${manrope.variable} antialiased`}
     >
-      <body>{children}</body>
+      <body>
+        <LangProvider>
+          <LangSwitch />
+          {children}
+        </LangProvider>
+      </body>
     </html>
   );
 }

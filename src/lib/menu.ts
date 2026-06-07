@@ -216,7 +216,7 @@ export const FEATURED: Featured[] = [
     tag: CHEF,
   },
   {
-    image: "/img/tea.jpg",
+    image: "/img/karak.jpg",
     to: "hot",
     name: { ru: "Карак чай", kz: "Карак шай", en: "Karak Tea" },
     price: "2 250",
@@ -247,6 +247,15 @@ export const I18N: Record<Lang, Record<string, string>> = {
     footerMade: "Электронное меню для ресторана Fondue",
     footerDemo: "Демо-прототип · Фаза 1",
     langLabel: "Язык",
+    aboutTitle: "О нас",
+    aboutLead: "Место, где встречаются огонь, восток и уют.",
+    aboutP1:
+      "Fondue — ресторан в самом сердце Астаны, где классические стейки на углях соседствуют с блюдами восточной кухни, ароматной пастой и пиццей на дровах. Мы готовим из локальных и сезонных продуктов, бережно раскрывая вкус каждого блюда.",
+    aboutP2:
+      "Тёплый свет, неспешные вечера и внимательный сервис — мы создаём атмосферу, в которую хочется возвращаться. Семейный ужин, встреча с друзьями или особенный повод — в Fondue вам всегда рады.",
+    menuPanelNote: "Выберите раздел, чтобы посмотреть блюда и цены.",
+    categoryCta: "Смотреть",
+    backToMenu: "Назад к меню",
   },
   kz: {
     kicker: "Астана · Мейрамхана",
@@ -270,6 +279,15 @@ export const I18N: Record<Lang, Record<string, string>> = {
     footerMade: "Fondue мейрамханасына арналған электронды мәзір",
     footerDemo: "Демо-прототип · 1-кезең",
     langLabel: "Тіл",
+    aboutTitle: "Біз туралы",
+    aboutLead: "От, шығыс және жайлылық тоғысатын орын.",
+    aboutP1:
+      "Fondue — Астананың жүрегіндегі мейрамхана, мұнда көмірде пісірілген классикалық стейктер шығыс асханасының тағамдарымен, хош иісті паста және отында пісірілген пиццамен үндеседі. Біз жергілікті әрі маусымдық өнімдерден дайындап, әр тағамның дәмін ұқыппен ашамыз.",
+    aboutP2:
+      "Жылы жарық, асықпайтын кештер және ілтипатты қызмет — біз қайта оралғыңыз келетін атмосфера сыйлаймыз. Отбасылық кешкі ас, достармен кездесу немесе ерекше сәт — Fondue сізді әрқашан қуана қарсы алады.",
+    menuPanelNote: "Тағамдар мен бағаларды көру үшін бөлімді таңдаңыз.",
+    categoryCta: "Қарау",
+    backToMenu: "Мәзірге оралу",
   },
   en: {
     kicker: "Astana · Restaurant",
@@ -293,6 +311,15 @@ export const I18N: Record<Lang, Record<string, string>> = {
     footerMade: "Digital menu for Fondue restaurant",
     footerDemo: "Demo prototype · Phase 1",
     langLabel: "Language",
+    aboutTitle: "About Us",
+    aboutLead: "Where fire, the East and warmth meet.",
+    aboutP1:
+      "Fondue is a restaurant in the heart of Astana, where char-grilled steaks sit alongside Eastern dishes, fragrant pasta and wood-fired pizza. We cook with local, seasonal produce, drawing out the character of every plate.",
+    aboutP2:
+      "Warm light, unhurried evenings and attentive service — we craft an atmosphere worth returning to. A family dinner, a night with friends or a special occasion — you are always welcome at Fondue.",
+    menuPanelNote: "Pick a section to see its dishes and prices.",
+    categoryCta: "View",
+    backToMenu: "Back to menu",
   },
 };
 

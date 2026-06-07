@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import {
   MapPin,
   Clock,
@@ -10,15 +11,12 @@ import {
   MessageCircle,
   CreditCard,
   ChevronDown,
+  ArrowRight,
+  UtensilsCrossed,
 } from "lucide-react";
-import {
-  MENU,
-  FEATURED,
-  I18N,
-  LANGS,
-  CONTACT,
-  type Lang,
-} from "@/lib/menu";
+import { MENU, FEATURED, I18N, CONTACT } from "@/lib/menu";
+import { useLang } from "@/lib/lang-context";
+import { useScrollReveal } from "@/lib/use-reveal";
 import { ForkDivider } from "./ForkDivider";
 
 function InstagramGlyph({ className = "" }: { className?: string }) {
@@ -41,85 +39,19 @@ function InstagramGlyph({ className = "" }: { className?: string }) {
 }
 
 export default function FondueMenu() {
-  const [lang, setLang] = useState<Lang>("ru");
-  const [activeId, setActiveId] = useState<string>(MENU[0].id);
+  const { lang } = useLang();
   const [heroShown, setHeroShown] = useState(false);
   const t = I18N[lang];
 
-  const chipRefs = useRef<Record<string, HTMLAnchorElement | null>>({});
+  useScrollReveal();
 
   useEffect(() => {
     const id = requestAnimationFrame(() => setHeroShown(true));
     return () => cancelAnimationFrame(id);
   }, []);
 
-  // Reveal-on-scroll for any element marked `.reveal`.
-  useEffect(() => {
-    const els = Array.from(document.querySelectorAll<HTMLElement>(".reveal"));
-    const io = new IntersectionObserver(
-      (entries) => {
-        for (const e of entries) {
-          if (e.isIntersecting) {
-            e.target.classList.add("is-in");
-            io.unobserve(e.target);
-          }
-        }
-      },
-      { rootMargin: "0px 0px -12% 0px", threshold: 0.12 },
-    );
-    els.forEach((el) => io.observe(el));
-    return () => io.disconnect();
-  }, []);
-
-  // Scroll-spy: highlight the category currently in view.
-  useEffect(() => {
-    const sections = MENU.map((c) => document.getElementById(c.id)).filter(
-      Boolean,
-    ) as HTMLElement[];
-    const io = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
-        if (visible[0]) setActiveId(visible[0].target.id);
-      },
-      { rootMargin: "-45% 0px -50% 0px", threshold: [0, 0.25, 0.5, 1] },
-    );
-    sections.forEach((s) => io.observe(s));
-    return () => io.disconnect();
-  }, []);
-
-  useEffect(() => {
-    const chip = chipRefs.current[activeId];
-    chip?.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
-  }, [activeId]);
-
   return (
     <div className="relative z-10" id="top">
-      {/* ===================== LANGUAGE SWITCH ===================== */}
-      <div
-        className="fixed right-3 top-3 z-[60] flex items-center gap-0.5 rounded-pill border border-gold/30 bg-bg/80 p-1 backdrop-blur-md"
-        role="group"
-        aria-label={t.langLabel}
-      >
-        {LANGS.map(({ code, label }) => {
-          const on = lang === code;
-          return (
-            <button
-              key={code}
-              onClick={() => setLang(code)}
-              aria-pressed={on}
-              className={[
-                "rounded-pill px-2.5 py-1 text-[0.72rem] font-bold tracking-wide transition-colors duration-200",
-                on ? "bg-gold text-bg" : "text-cream/65 hover:text-cream",
-              ].join(" ")}
-            >
-              {label}
-            </button>
-          );
-        })}
-      </div>
-
       {/* ============================ HERO ============================ */}
       <header className="relative flex min-h-[100svh] flex-col items-center justify-center overflow-hidden px-6 text-center">
         {/* background photo + overlays */}
@@ -181,34 +113,25 @@ export default function FondueMenu() {
       {/* ===================== STICKY CATEGORY NAV ===================== */}
       <div className="sticky top-0 z-50 border-b border-gold/15 bg-bg/85 backdrop-blur-xl">
         <div className="mx-auto flex max-w-5xl items-center gap-4 px-3 pr-28 lg:pr-3">
-          <span className="hidden shrink-0 font-display text-2xl italic text-gilded md:block">
+          <a
+            href="#top"
+            className="hidden shrink-0 font-display text-2xl italic text-gilded md:block"
+          >
             Fondue
-          </span>
+          </a>
           <nav
             className="flex flex-1 gap-1.5 overflow-x-auto py-2.5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
             aria-label="Категории меню"
           >
-            {MENU.map((c) => {
-              const active = activeId === c.id;
-              return (
-                <a
-                  key={c.id}
-                  href={`#${c.id}`}
-                  ref={(el) => {
-                    chipRefs.current[c.id] = el;
-                  }}
-                  aria-current={active ? "true" : undefined}
-                  className={[
-                    "shrink-0 rounded-pill px-3.5 py-1.5 text-[0.82rem] font-medium tracking-wide whitespace-nowrap transition-colors duration-200",
-                    active
-                      ? "bg-gold text-bg"
-                      : "border border-gold/25 text-cream/70 hover:border-gold/60 hover:text-cream",
-                  ].join(" ")}
-                >
-                  {c.title[lang]}
-                </a>
-              );
-            })}
+            {MENU.map((c) => (
+              <Link
+                key={c.id}
+                href={`/menu/${c.id}`}
+                className="shrink-0 rounded-pill border border-gold/25 px-3.5 py-1.5 text-[0.82rem] font-medium tracking-wide whitespace-nowrap text-cream/70 transition-colors duration-200 hover:border-gold/60 hover:text-cream"
+              >
+                {c.title[lang]}
+              </Link>
+            ))}
           </nav>
         </div>
       </div>
@@ -224,9 +147,9 @@ export default function FondueMenu() {
 
         <div className="grid grid-cols-2 gap-4 sm:gap-5 md:grid-cols-3">
           {FEATURED.map((f) => (
-            <a
+            <Link
               key={f.image}
-              href={`#${f.to}`}
+              href={`/menu/${f.to}`}
               className="group relative block aspect-[4/5] overflow-hidden rounded-2xl border border-gold/20"
             >
               <Image
@@ -251,75 +174,76 @@ export default function FondueMenu() {
                   <span className="ml-1 text-sm text-gold/70">{t.currency}</span>
                 </p>
               </div>
-            </a>
+            </Link>
           ))}
         </div>
       </section>
 
-      {/* ============================ MENU ============================ */}
-      <main className="mx-auto max-w-3xl px-6 pb-24 pt-16" id="menu">
-        <div className="reveal mb-16 text-center">
+      {/* =========================== ABOUT US =========================== */}
+      <section
+        id="about"
+        className="reveal scroll-mt-24 mx-auto max-w-3xl px-6 pt-20 text-center"
+      >
+        <div className="ornament mb-6 text-[0.7rem]">✦</div>
+        <h2 className="font-display text-5xl font-medium text-cream sm:text-6xl">
+          {t.aboutTitle}
+        </h2>
+        <p className="mx-auto mt-5 max-w-xl font-display text-xl italic leading-snug text-gold-soft sm:text-2xl">
+          {t.aboutLead}
+        </p>
+        <ForkDivider className="mx-auto mt-7 h-3 w-40 text-gold/50" />
+        <div className="mx-auto mt-8 max-w-2xl space-y-5 text-[0.98rem] leading-relaxed text-ink">
+          <p>{t.aboutP1}</p>
+          <p>{t.aboutP2}</p>
+        </div>
+      </section>
+
+      {/* ===================== MENU — CATEGORY PANEL ===================== */}
+      <main className="mx-auto max-w-5xl px-6 pb-24 pt-20" id="menu">
+        <div className="reveal mb-14 text-center">
           <div className="ornament mb-6 text-[0.7rem]">✦</div>
           <h2 className="font-display text-6xl font-medium tracking-tight text-cream sm:text-7xl">
             {t.menuTitle}
           </h2>
           <p className="mx-auto mt-5 max-w-md text-sm leading-relaxed text-ink">
-            {t.qrNote}
+            {t.menuPanelNote}
           </p>
         </div>
 
-        <div className="space-y-16">
-          {MENU.map((cat) => (
-            <section
-              key={cat.id}
-              id={cat.id}
-              className="reveal scroll-mt-24"
-              aria-labelledby={`${cat.id}-title`}
-            >
-              <div className="mb-7 flex items-center gap-4">
-                <h3
-                  id={`${cat.id}-title`}
-                  className="font-display text-4xl font-semibold tracking-tight text-gold-soft sm:text-[2.65rem]"
-                >
-                  {cat.title[lang]}
-                </h3>
-                <span className="h-px flex-1 bg-gradient-to-r from-gold/35 to-transparent" />
-              </div>
-
-              <ul className="space-y-5">
-                {cat.items.map((item, i) => (
-                  <li
-                    key={item.name + i}
-                    className="reveal-row"
-                    style={{ "--i": i } as React.CSSProperties}
-                  >
-                    <div className="flex items-end">
-                      <div className="min-w-0">
-                        <span className="align-middle text-[1.06rem] font-medium leading-tight text-cream">
-                          {item.name}
-                        </span>
-                        {item.tag && (
-                          <span className="ml-2 inline-block translate-y-[-1px] rounded-pill border border-gold/40 px-2 py-[1px] align-middle text-[0.6rem] font-semibold uppercase tracking-wider text-gold">
-                            {item.tag[lang]}
-                          </span>
-                        )}
-                        {item.note && (
-                          <span className="ml-2 align-middle text-xs text-ink">
-                            {item.note}
-                          </span>
-                        )}
-                      </div>
-                      <span className="leader" aria-hidden="true" />
-                      <span className="shrink-0 whitespace-nowrap font-display text-xl font-semibold text-gilded">
-                        {item.price}
-                        <span className="ml-1 text-sm text-gold/70">{t.currency}</span>
-                      </span>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </section>
-          ))}
+        <div className="reveal grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {MENU.map((cat, i) => {
+            const preview = cat.items
+              .slice(0, 3)
+              .map((it) => it.name)
+              .join(" · ");
+            return (
+              <Link
+                key={cat.id}
+                href={`/menu/${cat.id}`}
+                className="reveal-row group flex flex-col justify-between overflow-hidden rounded-2xl border border-gold/20 bg-wine/20 p-6 transition-all duration-300 hover:-translate-y-0.5 hover:border-gold/60 hover:bg-wine/35"
+                style={{ "--i": i } as React.CSSProperties}
+              >
+                <div>
+                  <div className="flex items-start justify-between gap-3">
+                    <h3 className="font-display text-2xl font-semibold leading-tight text-gold-soft sm:text-3xl">
+                      {cat.title[lang]}
+                    </h3>
+                    <span className="mt-1 inline-flex shrink-0 items-center gap-1 text-[0.7rem] font-semibold uppercase tracking-widest text-gold/60">
+                      <UtensilsCrossed className="h-3.5 w-3.5" />
+                      {cat.items.length}
+                    </span>
+                  </div>
+                  <p className="mt-3 line-clamp-2 text-sm leading-relaxed text-ink">
+                    {preview}
+                  </p>
+                </div>
+                <span className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold tracking-wide text-gold transition-colors group-hover:text-gold-bright">
+                  {t.categoryCta}
+                  <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                </span>
+              </Link>
+            );
+          })}
         </div>
       </main>
 
