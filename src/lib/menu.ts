@@ -261,7 +261,7 @@ export const I18N: Record<Lang, Record<string, string>> = {
     kicker: "Астана · Мейрамхана",
     heroTagline: "Көмірдегі стейктер, шығыс асханасы, паста мен пицца — жылы атмосферада",
     viewMenu: "Мәзірді қарау",
-    howToGet: "Қалай жету",
+    howToGet: "Қалай жетуге болады?",
     featuredTitle: "Ұсынамыз",
     menuTitle: "Мәзір",
     currency: "₸",
