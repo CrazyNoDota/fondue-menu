@@ -149,7 +149,7 @@ export default function FondueMenu() {
           {FEATURED.map((f) => (
             <Link
               key={f.image}
-              href={`/menu/${f.to}`}
+              href={`/menu/${f.to}/${f.index}`}
               className="group relative block aspect-[4/5] overflow-hidden rounded-2xl border border-gold/20"
             >
               <Image

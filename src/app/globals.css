@@ -38,6 +38,8 @@ html {
   scroll-behavior: smooth;
   scroll-padding-top: 86px;
   -webkit-text-size-adjust: 100%;
+  /* Disable vertical overscroll (rubber-band / bounce) without killing scroll. */
+  overscroll-behavior-y: none;
 }
 
 body {
@@ -50,6 +52,7 @@ body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   overflow-x: hidden;
+  overscroll-behavior-y: none;
 }
 
 /* Fine film-grain to give the dark background candlelit depth.

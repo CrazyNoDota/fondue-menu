@@ -68,16 +68,19 @@ export default function CategoryView({ id }: { id: string }) {
           <ForkDivider className="mx-auto mt-5 h-3 w-44 text-gold/50" />
         </div>
 
-        <ul className="reveal space-y-5">
+        <ul className="reveal space-y-1">
           {cat.items.map((item, i) => (
             <li
               key={item.name + i}
               className="reveal-row"
               style={{ "--i": i } as React.CSSProperties}
             >
-              <div className="flex items-end">
+              <Link
+                href={`/menu/${cat.id}/${i}`}
+                className="group -mx-3 flex items-end rounded-xl px-3 py-3 transition-colors duration-200 hover:bg-wine/30"
+              >
                 <div className="min-w-0">
-                  <span className="align-middle text-[1.06rem] font-medium leading-tight text-cream">
+                  <span className="align-middle text-[1.06rem] font-medium leading-tight text-cream transition-colors group-hover:text-gold-soft">
                     {item.name}
                   </span>
                   {item.tag && (
@@ -96,7 +99,7 @@ export default function CategoryView({ id }: { id: string }) {
                   {item.price}
                   <span className="ml-1 text-sm text-gold/70">{t.currency}</span>
                 </span>
-              </div>
+              </Link>
             </li>
           ))}
         </ul>

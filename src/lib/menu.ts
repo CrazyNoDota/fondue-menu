@@ -7,6 +7,8 @@ export type MenuItem = {
   price: string; // formatted without currency symbol, e.g. "3 200" or "950 / 1 350"
   tag?: L;
   note?: string;
+  image?: string; // optional dedicated photo; otherwise a category fallback is used
+  desc?: L; // optional short description shown on the dish detail page
 };
 
 export type MenuCategory = {
@@ -30,7 +32,17 @@ export const MENU: MenuCategory[] = [
     id: "salads",
     title: { ru: "Салаты", kz: "Салаттар", en: "Salads" },
     items: [
-      { name: "Цезарь с курицей", price: "3 200", tag: HIT },
+      {
+        name: "Цезарь с курицей",
+        price: "3 200",
+        tag: HIT,
+        image: "/img/caesar.jpg",
+        desc: {
+          ru: "Классический Цезарь с сочной курицей-гриль, хрустящими сухариками и пармезаном.",
+          kz: "Грильде пісірілген тауық еті, қытырлақ кеспе нан мен пармезанмен классикалық Цезарь.",
+          en: "Classic Caesar with grilled chicken, crisp croutons and parmesan.",
+        },
+      },
       { name: "Цезарь с креветками", price: "3 500" },
       { name: "Хрустящие баклажаны в кисло-сладком соусе", price: "2 750" },
       { name: "Греческий", price: "2 900" },
@@ -52,7 +64,17 @@ export const MENU: MenuCategory[] = [
     items: [
       { name: "Суп лапша куриная", price: "1 650" },
       { name: "Чечевичный крем-суп", price: "1 450" },
-      { name: "Рамён с курицей", price: "1 850", tag: HIT },
+      {
+        name: "Рамён с курицей",
+        price: "1 850",
+        tag: HIT,
+        image: "/img/ramen.jpg",
+        desc: {
+          ru: "Ароматный бульон, пшеничная лапша и нежная курица с традиционными топпингами.",
+          kz: "Хош иісті сорпа, бидай кеспесі және дәстүрлі қоспалармен жұмсақ тауық еті.",
+          en: "Fragrant broth, wheat noodles and tender chicken with classic toppings.",
+        },
+      },
       { name: "Рамён с говядиной", price: "2 250" },
       { name: "Том ям", price: "2 400", tag: SPICY },
       { name: "Шорпа из баранины", price: "2 450" },
@@ -63,7 +85,17 @@ export const MENU: MenuCategory[] = [
     title: { ru: "Вторые блюда", kz: "Ыстық тағамдар", en: "Mains" },
     items: [
       { name: "Стейк Тибон", price: "2 900", tag: CHEF },
-      { name: "Стейк Рибай", price: "2 900", tag: CHEF },
+      {
+        name: "Стейк Рибай",
+        price: "2 900",
+        tag: CHEF,
+        image: "/img/steak.jpg",
+        desc: {
+          ru: "Сочный стейк рибай из мраморной говядины, приготовленный на углях до идеальной прожарки.",
+          kz: "Көмірде піскен мраморлы сиыр етінен жасалған, мінсіз пісірілген шырынды рибай стейк.",
+          en: "Juicy ribeye of marbled beef, char-grilled to the perfect doneness.",
+        },
+      },
       { name: "Томлёные говяжьи рёбрышки", price: "2 900" },
       { name: "Бефстроганов", price: "3 550" },
     ],
@@ -91,7 +123,17 @@ export const MENU: MenuCategory[] = [
     title: { ru: "Пицца", kz: "Пицца", en: "Pizza" },
     items: [
       { name: "Маргарита", price: "2 550" },
-      { name: "Пепперони", price: "3 200", tag: HIT },
+      {
+        name: "Пепперони",
+        price: "3 200",
+        tag: HIT,
+        image: "/img/pizza.jpg",
+        desc: {
+          ru: "Тонкое тесто, пикантная пепперони и тянущаяся моцарелла из дровяной печи.",
+          kz: "Жұқа қамыр, ащылау пепперони және отын пешінен шыққан созылмалы моцарелла.",
+          en: "Thin crust, spicy pepperoni and stretchy mozzarella from the wood-fired oven.",
+        },
+      },
       { name: "Курица с грибами", price: "2 950" },
       { name: "Хачапури по-аджарски", price: "2 550" },
     ],
@@ -102,7 +144,17 @@ export const MENU: MenuCategory[] = [
     items: [
       { name: "Двойной бургер с говяжьей котлетой", price: "1 900" },
       { name: "Двойной чизбургер с говяжьей котлетой", price: "1 900" },
-      { name: "Qazyburger с казы", price: "1 900", tag: CHEF },
+      {
+        name: "Qazyburger с казы",
+        price: "1 900",
+        tag: CHEF,
+        image: "/img/burger.jpg",
+        desc: {
+          ru: "Фирменный бургер с домашней казы, говяжьей котлетой и соусом от шефа.",
+          kz: "Үй қазысы, сиыр котлеті және шеф тұздығымен фирмалық бургер.",
+          en: "Signature burger with house qazy, a beef patty and the chef’s own sauce.",
+        },
+      },
       { name: "Донер куриный", price: "1 850" },
       { name: "Донер с говядиной", price: "2 250" },
       { name: "Донер ассорти", price: "2 000" },
@@ -143,7 +195,17 @@ export const MENU: MenuCategory[] = [
       { name: "Зелёный чай", price: "1 350" },
       { name: "Ташкентский чай", price: "1 850" },
       { name: "Марокканский чай", price: "1 850" },
-      { name: "Карак чай", price: "2 250", tag: HIT },
+      {
+        name: "Карак чай",
+        price: "2 250",
+        tag: HIT,
+        image: "/img/karak.jpg",
+        desc: {
+          ru: "Насыщенный чай со сгущённым молоком и специями, заваренный по восточному рецепту.",
+          kz: "Қою сүт пен дәмдеуіштер қосылған, шығыс рецептімен қайнатылған қою шай.",
+          en: "Rich tea with condensed milk and spices, brewed the Eastern way.",
+        },
+      },
       { name: "Масала чай", price: "2 250" },
       { name: "Ягодный чай", price: "2 150" },
       { name: "Шиповник-мята", price: "2 250" },
@@ -171,9 +233,32 @@ export const MENU: MenuCategory[] = [
   },
 ];
 
+// Fallback photo per category for dishes without a dedicated image.
+const CATEGORY_IMAGE: Record<string, string> = {
+  salads: "/img/caesar.jpg",
+  starters: "/img/grill-hero.jpg",
+  soups: "/img/ramen.jpg",
+  mains: "/img/steak.jpg",
+  eastern: "/img/grill-hero.jpg",
+  pasta: "/img/pasta.jpg",
+  pizza: "/img/pizza.jpg",
+  fastfood: "/img/burger.jpg",
+  sides: "/img/grill-hero.jpg",
+  desserts: "/img/grill-hero.jpg",
+  sauces: "/img/grill-hero.jpg",
+  hot: "/img/karak.jpg",
+  cold: "/img/karak.jpg",
+};
+
+/** Resolve the best available photo for a dish. */
+export function dishImage(catId: string, item: MenuItem): string {
+  return item.image ?? CATEGORY_IMAGE[catId] ?? "/img/grill-hero.jpg";
+}
+
 export type Featured = {
   image: string;
-  to: string; // category anchor
+  to: string; // category id the dish belongs to
+  index: number; // position of the dish within that category's items
   name: L;
   price: string;
   tag?: L;
@@ -183,6 +268,7 @@ export const FEATURED: Featured[] = [
   {
     image: "/img/steak.jpg",
     to: "mains",
+    index: 1,
     name: { ru: "Стейк Рибай", kz: "Рибай стейк", en: "Ribeye Steak" },
     price: "2 900",
     tag: CHEF,
@@ -190,6 +276,7 @@ export const FEATURED: Featured[] = [
   {
     image: "/img/caesar.jpg",
     to: "salads",
+    index: 0,
     name: { ru: "Цезарь с курицей", kz: "Тауық етімен Цезарь", en: "Chicken Caesar" },
     price: "3 200",
     tag: HIT,
@@ -197,6 +284,7 @@ export const FEATURED: Featured[] = [
   {
     image: "/img/ramen.jpg",
     to: "soups",
+    index: 2,
     name: { ru: "Рамён с курицей", kz: "Тауық рамені", en: "Chicken Ramen" },
     price: "1 850",
     tag: HIT,
@@ -204,6 +292,7 @@ export const FEATURED: Featured[] = [
   {
     image: "/img/pizza.jpg",
     to: "pizza",
+    index: 1,
     name: { ru: "Пепперони", kz: "Пепперони", en: "Pepperoni" },
     price: "3 200",
     tag: HIT,
@@ -211,6 +300,7 @@ export const FEATURED: Featured[] = [
   {
     image: "/img/burger.jpg",
     to: "fastfood",
+    index: 2,
     name: { ru: "Qazyburger с казы", kz: "Qazyburger", en: "Qazyburger" },
     price: "1 900",
     tag: CHEF,
@@ -218,6 +308,7 @@ export const FEATURED: Featured[] = [
   {
     image: "/img/karak.jpg",
     to: "hot",
+    index: 3,
     name: { ru: "Карак чай", kz: "Карак шай", en: "Karak Tea" },
     price: "2 250",
     tag: HIT,
@@ -256,6 +347,8 @@ export const I18N: Record<Lang, Record<string, string>> = {
     menuPanelNote: "Выберите раздел, чтобы посмотреть блюда и цены.",
     categoryCta: "Смотреть",
     backToMenu: "Назад к меню",
+    backToCategory: "Назад к разделу",
+    dishAbout: "Описание",
   },
   kz: {
     kicker: "Астана · Мейрамхана",
@@ -288,6 +381,8 @@ export const I18N: Record<Lang, Record<string, string>> = {
     menuPanelNote: "Тағамдар мен бағаларды көру үшін бөлімді таңдаңыз.",
     categoryCta: "Қарау",
     backToMenu: "Мәзірге оралу",
+    backToCategory: "Бөлімге оралу",
+    dishAbout: "Сипаттамасы",
   },
   en: {
     kicker: "Astana · Restaurant",
@@ -320,6 +415,8 @@ export const I18N: Record<Lang, Record<string, string>> = {
     menuPanelNote: "Pick a section to see its dishes and prices.",
     categoryCta: "View",
     backToMenu: "Back to menu",
+    backToCategory: "Back to section",
+    dishAbout: "About",
   },
 };
 
