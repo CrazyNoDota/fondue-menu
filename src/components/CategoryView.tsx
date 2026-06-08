@@ -17,7 +17,7 @@ export default function CategoryView({ id }: { id: string }) {
   return (
     <div className="relative z-10 min-h-[100svh]" id="top">
       {/* ===================== STICKY CATEGORY NAV ===================== */}
-      <div className="sticky top-0 z-50 border-b border-gold/15 bg-bg/85 backdrop-blur-xl">
+      <div className="sticky top-0 z-50 border-b border-gold/15 bg-bg/90 backdrop-blur-md">
         <div className="mx-auto flex max-w-5xl items-center gap-4 px-3 pr-28 lg:pr-3">
           <Link
             href="/"
