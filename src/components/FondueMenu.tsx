@@ -50,6 +50,29 @@ export default function FondueMenu() {
     return () => cancelAnimationFrame(id);
   }, []);
 
+  // QR codes on the tables point to `/#menu`. Jump straight to the menu
+  // section. The browser's native hash scroll is unreliable here: the hero
+  // image, the web fonts (display: swap) and reveal animations keep growing the
+  // layout above #menu for the first second, so a one-shot scroll lands short.
+  // Re-pin to the menu on every layout change until things settle.
+  useEffect(() => {
+    if (window.location.hash !== "#menu") return;
+    const scrollToMenu = () =>
+      document
+        .getElementById("menu")
+        ?.scrollIntoView({ behavior: "auto", block: "start" });
+
+    scrollToMenu();
+    const ro = new ResizeObserver(scrollToMenu);
+    ro.observe(document.body);
+    // Stop fighting the user once the page has stabilised.
+    const stop = setTimeout(() => ro.disconnect(), 1500);
+    return () => {
+      ro.disconnect();
+      clearTimeout(stop);
+    };
+  }, []);
+
   return (
     <div className="relative z-10" id="top">
       {/* ============================ HERO ============================ */}
