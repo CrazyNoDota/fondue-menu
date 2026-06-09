@@ -112,11 +112,18 @@ export default function FondueMenu() {
 
       {/* ===================== STICKY CATEGORY NAV ===================== */}
       <div className="sticky top-0 z-50 border-b border-gold/15 bg-bg/90 backdrop-blur-md">
-        <div className="mx-auto flex max-w-5xl items-center gap-4 px-3 pr-28 lg:pr-3">
+        <div className="mx-auto flex max-w-5xl items-center gap-4 px-3 pr-48 2xl:pr-3">
           <a
             href="#top"
-            className="hidden shrink-0 font-display text-2xl italic text-gilded md:block"
+            className="hidden shrink-0 items-center gap-2 font-display text-2xl italic text-gilded md:flex"
           >
+            <Image
+              src="/logo.png"
+              alt=""
+              width={32}
+              height={32}
+              className="h-8 w-8 rounded-full object-cover"
+            />
             Fondue
           </a>
           <nav

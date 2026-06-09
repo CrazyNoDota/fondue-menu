@@ -2,7 +2,8 @@ import type { Metadata, Viewport } from "next";
 import { Cormorant_Garamond, Manrope } from "next/font/google";
 import "./globals.css";
 import { LangProvider } from "@/lib/lang-context";
-import { LangSwitch } from "@/components/LangSwitch";
+import { CartProvider } from "@/lib/cart-context";
+import { TopBar } from "@/components/TopBar";
 
 const cormorant = Cormorant_Garamond({
   variable: "--font-cormorant",
@@ -48,8 +49,10 @@ export default function RootLayout({
     >
       <body>
         <LangProvider>
-          <LangSwitch />
-          {children}
+          <CartProvider>
+            <TopBar />
+            {children}
+          </CartProvider>
         </LangProvider>
       </body>
     </html>

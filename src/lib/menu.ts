@@ -349,6 +349,20 @@ export const I18N: Record<Lang, Record<string, string>> = {
     backToMenu: "Назад к меню",
     backToCategory: "Назад к разделу",
     dishAbout: "Описание",
+    personal: "Личное",
+    settingsSection: "Настройки",
+    settingsSoon: "Раздел в разработке.",
+    cartSection: "Корзина",
+    cartEmpty: "В корзине пока пусто.",
+    browseMenu: "Перейти в меню",
+    addToCart: "В корзину",
+    inCart: "В корзине",
+    buy: "Купить",
+    purchased: "Куплено",
+    removeItem: "Удалить",
+    clearCart: "Очистить корзину",
+    total: "Итого",
+    home: "На главную",
   },
   kz: {
     kicker: "Астана · Мейрамхана",
@@ -383,6 +397,20 @@ export const I18N: Record<Lang, Record<string, string>> = {
     backToMenu: "Мәзірге оралу",
     backToCategory: "Бөлімге оралу",
     dishAbout: "Сипаттамасы",
+    personal: "Жеке",
+    settingsSection: "Параметрлер",
+    settingsSoon: "Бөлім әзірленуде.",
+    cartSection: "Себет",
+    cartEmpty: "Себет әзірге бос.",
+    browseMenu: "Мәзірге өту",
+    addToCart: "Себетке",
+    inCart: "Себетте",
+    buy: "Сатып алу",
+    purchased: "Сатып алынды",
+    removeItem: "Жою",
+    clearCart: "Себетті тазалау",
+    total: "Барлығы",
+    home: "Басты бетке",
   },
   en: {
     kicker: "Astana · Restaurant",
@@ -417,8 +445,29 @@ export const I18N: Record<Lang, Record<string, string>> = {
     backToMenu: "Back to menu",
     backToCategory: "Back to section",
     dishAbout: "About",
+    personal: "Personal",
+    settingsSection: "Settings",
+    settingsSoon: "This section is coming soon.",
+    cartSection: "Cart",
+    cartEmpty: "Your cart is empty.",
+    browseMenu: "Browse the menu",
+    addToCart: "Add to cart",
+    inCart: "In cart",
+    buy: "Buy",
+    purchased: "Purchased",
+    removeItem: "Remove",
+    clearCart: "Clear cart",
+    total: "Total",
+    home: "Home",
   },
 };
+
+/** Parse a formatted price like "3 200" or "950 / 1 350" into a number (first value). */
+export function parsePrice(price: string): number {
+  const first = price.split("/")[0];
+  const digits = first.replace(/[^\d]/g, "");
+  return digits ? parseInt(digits, 10) : 0;
+}
 
 // Placeholder contact details — confirm with the venue before launch.
 export const CONTACT = {
